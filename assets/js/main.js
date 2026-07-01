@@ -1,1 +1,1 @@
-console.log("App initialized");
+console.log("AllInOne Hub is ready!");

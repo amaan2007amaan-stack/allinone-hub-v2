@@ -2,20 +2,51 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AllInOne Hub</title>
     <style>
-        body { font-family: sans-serif; background: #f8fafc; margin: 0; }
-        .navbar { background: #2563eb; color: white; padding: 1rem; text-align: center; }
-        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
-        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
+        body { font-family: sans-serif; display: flex; height: 100vh; background: #f9f9f9; }
+        
+        /* Sidebar */
+        .sidebar { width: 240px; background: white; padding: 20px; border-right: 1px solid #eee; }
+        .sidebar h2 { font-size: 18px; margin-bottom: 20px; }
+        .nav-item { padding: 10px; margin-bottom: 5px; cursor: pointer; border-radius: 8px; }
+        .nav-item:hover { background: #f0f0f0; }
+
+        /* Main Content */
+        .main-content { flex: 1; padding: 20px; overflow-y: auto; }
+        
+        /* Hero Banner */
+        .banner { background: #dbeafe; padding: 40px; border-radius: 16px; margin-bottom: 20px; }
+        .search-bar { width: 100%; max-width: 500px; padding: 12px; border-radius: 25px; border: 1px solid #ccc; margin-top: 10px; }
+        
+        /* Categories */
+        .tabs { display: flex; gap: 15px; margin-bottom: 20px; }
+        .tab { padding: 8px 16px; background: #eee; border-radius: 20px; cursor: pointer; }
+        .tab.active { background: #2563eb; color: white; }
     </style>
 </head>
 <body>
-    <div class="navbar"><h1>AllInOne Hub</h1></div>
-    <div class="container">
-        <div class="card"><h3>PDF Merge</h3><p>Combine PDFs</p></div>
-        <div class="card"><h3>Watermark Remover</h3><p>Clean videos/images</p></div>
-        <div class="card"><h3>Web Tools</h3><p>CSS/JS Minifier</p></div>
+    <div class="sidebar">
+        <h2>AllInOne Hub</h2>
+        <div class="nav-item">🏠 Home</div>
+        <div class="nav-item">✨ AI Tools</div>
+        <div class="nav-item">📂 All Tools</div>
+    </div>
+    
+    <div class="main-content">
+        <div class="banner">
+            <h1>Templates</h1>
+            <p>Access thousands of professional tools instantly.</p>
+            <input type="text" class="search-bar" placeholder="Search tools...">
+        </div>
+        
+        <div class="tabs">
+            <div class="tab active">Video</div>
+            <div class="tab">Image</div>
+            <div class="tab">PDF</div>
+        </div>
     </div>
 </body>
 </html>

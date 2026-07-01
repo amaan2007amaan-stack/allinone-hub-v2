@@ -2,22 +2,20 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllInOne Hub | Professional Tools</title>
+    <title>AllInOne Hub</title>
     <style>
-        body { font-family: sans-serif; margin: 0; background-color: #f8fafc; }
-        header { background: #2563eb; color: white; padding: 2rem; text-align: center; box-shadow: 0 4px 6px rgba(0,0,0,0.1); }
-        main { max-width: 800px; margin: 2rem auto; text-align: center; }
-        .hero { font-size: 2rem; color: #1e293b; }
+        body { font-family: sans-serif; background: #f8fafc; margin: 0; }
+        .navbar { background: #2563eb; color: white; padding: 1rem; text-align: center; }
+        .container { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 20px; padding: 20px; }
+        .card { background: white; padding: 20px; border-radius: 10px; box-shadow: 0 2px 5px rgba(0,0,0,0.1); text-align: center; }
     </style>
 </head>
 <body>
-    <header>
-        <h1>AllInOne Hub</h1>
-    </header>
-    <main>
-        <h2 class="hero">Professional tools suite is getting ready...</h2>
-        <p>Stay tuned for the best online tools.</p>
-    </main>
+    <div class="navbar"><h1>AllInOne Hub</h1></div>
+    <div class="container">
+        <div class="card"><h3>PDF Merge</h3><p>Combine PDFs</p></div>
+        <div class="card"><h3>Watermark Remover</h3><p>Clean videos/images</p></div>
+        <div class="card"><h3>Web Tools</h3><p>CSS/JS Minifier</p></div>
+    </div>
 </body>
 </html>

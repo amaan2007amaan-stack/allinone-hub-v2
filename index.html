@@ -3,49 +3,62 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>AllInOne Hub</title>
+    <title>AllInOne Hub | Dashboard</title>
     <style>
+        /* Modern Reset */
         * { box-sizing: border-box; margin: 0; padding: 0; }
-        body { font-family: sans-serif; display: flex; height: 100vh; background: #f9f9f9; }
+        body { font-family: 'Segoe UI', sans-serif; display: flex; height: 100vh; background: #f9f9f9; }
         
-        /* Sidebar */
-        .sidebar { width: 240px; background: white; padding: 20px; border-right: 1px solid #eee; }
-        .sidebar h2 { font-size: 18px; margin-bottom: 20px; }
-        .nav-item { padding: 10px; margin-bottom: 5px; cursor: pointer; border-radius: 8px; }
-        .nav-item:hover { background: #f0f0f0; }
-
-        /* Main Content */
-        .main-content { flex: 1; padding: 20px; overflow-y: auto; }
+        /* Sidebar Design */
+        .sidebar { width: 250px; background: #ffffff; padding: 20px; border-right: 1px solid #e5e7eb; display: flex; flex-direction: column; }
+        .logo { font-size: 20px; font-weight: bold; margin-bottom: 30px; color: #1e293b; }
+        .nav-item { padding: 12px; margin-bottom: 8px; cursor: pointer; border-radius: 8px; transition: 0.3s; }
+        .nav-item:hover { background: #f3f4f6; }
         
-        /* Hero Banner */
-        .banner { background: #dbeafe; padding: 40px; border-radius: 16px; margin-bottom: 20px; }
-        .search-bar { width: 100%; max-width: 500px; padding: 12px; border-radius: 25px; border: 1px solid #ccc; margin-top: 10px; }
+        /* Content Area */
+        .main-content { flex: 1; padding: 30px; overflow-y: auto; }
         
-        /* Categories */
-        .tabs { display: flex; gap: 15px; margin-bottom: 20px; }
-        .tab { padding: 8px 16px; background: #eee; border-radius: 20px; cursor: pointer; }
-        .tab.active { background: #2563eb; color: white; }
+        /* Hero Section */
+        .banner { background: linear-gradient(135deg, #6366f1, #a855f7); color: white; padding: 40px; border-radius: 20px; text-align: center; margin-bottom: 30px; }
+        .search-bar { width: 80%; max-width: 500px; padding: 15px; border-radius: 30px; border: none; margin-top: 20px; outline: none; }
+        
+        /* Tools Grid */
+        .tabs { display: flex; gap: 20px; margin-bottom: 20px; }
+        .tab { padding: 10px 20px; background: #e5e7eb; border-radius: 20px; cursor: pointer; font-weight: 500; }
+        .tab.active { background: #6366f1; color: white; }
+        .grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 20px; }
+        .card { background: white; padding: 20px; border-radius: 12px; border: 1px solid #e5e7eb; transition: 0.3s; }
+        .card:hover { transform: translateY(-5px); box-shadow: 0 10px 15px rgba(0,0,0,0.1); }
     </style>
 </head>
 <body>
     <div class="sidebar">
-        <h2>AllInOne Hub</h2>
+        <div class="logo">AllInOne Hub</div>
         <div class="nav-item">🏠 Home</div>
         <div class="nav-item">✨ AI Tools</div>
-        <div class="nav-item">📂 All Tools</div>
+        <div class="nav-item">🛠 All Tools</div>
+        <div class="nav-item">📂 Recent Projects</div>
     </div>
     
     <div class="main-content">
         <div class="banner">
-            <h1>Templates</h1>
-            <p>Access thousands of professional tools instantly.</p>
-            <input type="text" class="search-bar" placeholder="Search tools...">
+            <h1>All-In-One Toolkit</h1>
+            <p>Everything you need in one place.</p>
+            <input type="text" class="search-bar" placeholder="Search for tools...">
         </div>
         
         <div class="tabs">
-            <div class="tab active">Video</div>
+            <div class="tab active">All</div>
+            <div class="tab">Video</div>
             <div class="tab">Image</div>
             <div class="tab">PDF</div>
+        </div>
+        
+        <div class="grid">
+            <div class="card"><h3>PDF Merge</h3><p>Fast processing</p></div>
+            <div class="card"><h3>Watermark Rem</h3><p>AI powered</p></div>
+            <div class="card"><h3>Video Cutter</h3><p>Easy sync</p></div>
+            <div class="card"><h3>Format Conv</h3><p>All formats</p></div>
         </div>
     </div>
 </body>

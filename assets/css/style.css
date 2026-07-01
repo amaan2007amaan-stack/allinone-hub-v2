@@ -1,27 +1,6 @@
-/* General Styling */
-:root {
-    --primary-color: #2563eb;
-    --bg-color: #f8fafc;
-    --text-color: #1e293b;
-}
-
-body {
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    background-color: var(--bg-color);
-    color: var(--text-color);
-    margin: 0;
-    padding: 0;
-}
-
-header {
-    background: #ffffff;
-    padding: 1rem 2rem;
-    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-    text-align: center;
-}
-
-main {
-    max-width: 1000px;
-    margin: 2rem auto;
-    padding: 0 1rem;
-}
+:root { --primary: #6366f1; --bg: #f9faf9; }
+body { font-family: sans-serif; background: var(--bg); margin: 0; display: flex; }
+.sidebar { width: 250px; height: 100vh; background: #fff; border-right: 1px solid #ddd; padding: 20px; }
+.main { flex: 1; padding: 40px; }
+.card { background: #fff; padding: 20px; border-radius: 10px; border: 1px solid #eee; margin-bottom: 20px; }
+.search-input { width: 100%; padding: 15px; border-radius: 25px; border: 1px solid #ccc; }

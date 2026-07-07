@@ -1,0 +1,409 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JSON Formatter - All In One Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --success: #10B981;
+            --error: #EF4444;
+            --bg: #FFFFFF;
+            --surface: #F9FAFB;
+            --text: #111827;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--surface);
+            color: var(--text);
+        }
+        
+        .header {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .header-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+        }
+        
+        .back-btn {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 1400px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .toolbar {
+            background: white;
+            padding: 1rem;
+            border-radius: 12px 12px 0 0;
+            border: 1px solid var(--border);
+            border-bottom: none;
+            display: flex;
+            gap: 0.75rem;
+            flex-wrap: wrap;
+        }
+        
+        .btn {
+            padding: 0.625rem 1.25rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.875rem;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5558E3;
+        }
+        
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+        
+        .editor-container {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 1px;
+            background: var(--border);
+        }
+        
+        .editor-panel {
+            background: white;
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .panel-header {
+            background: var(--surface);
+            padding: 0.75rem 1rem;
+            border-bottom: 1px solid var(--border);
+            font-weight: 600;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .status-badge {
+            padding: 0.25rem 0.75rem;
+            border-radius: 12px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+        
+        .status-valid {
+            background: #D1FAE5;
+            color: #065F46;
+        }
+        
+        .status-invalid {
+            background: #FEE2E2;
+            color: #991B1B;
+        }
+        
+        .editor-wrapper {
+            position: relative;
+            flex: 1;
+        }
+        
+        .editor {
+            width: 100%;
+            height: 500px;
+            padding: 1rem;
+            border: none;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            resize: none;
+            line-height: 1.5;
+        }
+        
+        .editor:focus {
+            outline: none;
+        }
+        
+        .line-numbers {
+            position: absolute;
+            left: 0;
+            top: 0;
+            padding: 1rem 0.5rem;
+            background: var(--surface);
+            color: var(--text-secondary);
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            line-height: 1.5;
+            text-align: right;
+            user-select: none;
+            border-right: 1px solid var(--border);
+        }
+        
+        .error-message {
+            background: #FEE2E2;
+            color: #991B1B;
+            padding: 1rem;
+            border-top: 1px solid var(--border);
+            font-size: 0.875rem;
+            display: none;
+        }
+        
+        .error-message.show {
+            display: block;
+        }
+
+        @media (max-width: 968px) {
+            .editor-container {
+                grid-template-columns: 1fr;
+            }
+            
+            .page-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                <span style="font-size: 1.5rem;">🚀</span>
+                <span>All In One Hub</span>
+            </a>
+            <a href="../../index.html" class="back-btn">← Back</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">{ } JSON Formatter</h1>
+        <p class="page-desc">Format, beautify, and validate JSON data</p>
+
+        <div class="toolbar">
+            <button class="btn btn-primary" onclick="formatJSON()">✨ Beautify</button>
+            <button class="btn btn-primary" onclick="minifyJSON()">🗜️ Minify</button>
+            <button class="btn btn-secondary" onclick="validateJSON()">✓ Validate</button>
+            <button class="btn btn-secondary" onclick="copyOutput()">📋 Copy</button>
+            <button class="btn btn-secondary" onclick="clearAll()">🗑️ Clear</button>
+            <button class="btn btn-secondary" onclick="loadSample()">📄 Sample</button>
+        </div>
+
+        <div class="editor-container">
+            <div class="editor-panel">
+                <div class="panel-header">
+                    Input JSON
+                </div>
+                <div class="editor-wrapper">
+                    <textarea class="editor" id="inputJSON" placeholder='Paste your JSON here...'></textarea>
+                </div>
+            </div>
+
+            <div class="editor-panel">
+                <div class="panel-header">
+                    Output
+                    <span class="status-badge" id="statusBadge" style="display: none;">Valid</span>
+                </div>
+                <div class="editor-wrapper">
+                    <textarea class="editor" id="outputJSON" placeholder='Formatted JSON will appear here...' readonly></textarea>
+                </div>
+                <div class="error-message" id="errorMessage"></div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const inputJSON = document.getElementById('inputJSON');
+        const outputJSON = document.getElementById('outputJSON');
+        const statusBadge = document.getElementById('statusBadge');
+        const errorMessage = document.getElementById('errorMessage');
+
+        function formatJSON() {
+            const input = inputJSON.value.trim();
+            
+            if (!input) {
+                showNotification('Please enter JSON data!', 'error');
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(input);
+                const formatted = JSON.stringify(parsed, null, 2);
+                outputJSON.value = formatted;
+                showValid();
+                showNotification('JSON formatted successfully!', 'success');
+            } catch (error) {
+                showInvalid(error.message);
+                showNotification('Invalid JSON!', 'error');
+            }
+        }
+
+        function minifyJSON() {
+            const input = inputJSON.value.trim();
+            
+            if (!input) {
+                showNotification('Please enter JSON data!', 'error');
+                return;
+            }
+
+            try {
+                const parsed = JSON.parse(input);
+                const minified = JSON.stringify(parsed);
+                outputJSON.value = minified;
+                showValid();
+                showNotification('JSON minified successfully!', 'success');
+            } catch (error) {
+                showInvalid(error.message);
+                showNotification('Invalid JSON!', 'error');
+            }
+        }
+
+        function validateJSON() {
+            const input = inputJSON.value.trim();
+            
+            if (!input) {
+                showNotification('Please enter JSON data!', 'error');
+                return;
+            }
+
+            try {
+                JSON.parse(input);
+                showValid();
+                outputJSON.value = '✓ Valid JSON';
+                showNotification('JSON is valid!', 'success');
+            } catch (error) {
+                showInvalid(error.message);
+                showNotification('Invalid JSON!', 'error');
+            }
+        }
+
+        function copyOutput() {
+            const output = outputJSON.value;
+            
+            if (!output) {
+                showNotification('Nothing to copy!', 'error');
+                return;
+            }
+
+            navigator.clipboard.writeText(output).then(() => {
+                showNotification('Copied to clipboard!', 'success');
+            });
+        }
+
+        function clearAll() {
+            if (confirm('Clear all content?')) {
+                inputJSON.value = '';
+                outputJSON.value = '';
+                statusBadge.style.display = 'none';
+                errorMessage.classList.remove('show');
+                showNotification('Cleared!', 'info');
+            }
+        }
+
+        function loadSample() {
+            const sample = {
+                "name": "John Doe",
+                "age": 30,
+                "email": "john@example.com",
+                "address": {
+                    "street": "123 Main St",
+                    "city": "New York",
+                    "country": "USA"
+                },
+                "hobbies": ["reading", "coding", "gaming"],
+                "active": true
+            };
+            
+            inputJSON.value = JSON.stringify(sample);
+            formatJSON();
+        }
+
+        function showValid() {
+            statusBadge.style.display = 'inline-block';
+            statusBadge.textContent = '✓ Valid';
+            statusBadge.className = 'status-badge status-valid';
+            errorMessage.classList.remove('show');
+        }
+
+        function showInvalid(message) {
+            statusBadge.style.display = 'inline-block';
+            statusBadge.textContent = '✗ Invalid';
+            statusBadge.className = 'status-badge status-invalid';
+            errorMessage.textContent = '❌ Error: ' + message;
+            errorMessage.classList.add('show');
+            outputJSON.value = '';
+        }
+
+        function showNotification(message, type = 'info') {
+            const colors = { success: '#10B981', error: '#EF4444', info: '#6366F1' };
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; bottom: 20px; right: 20px;
+                background: ${colors[type]}; color: white;
+                padding: 1rem 1.5rem; border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+
+        // Auto-format on Ctrl+Enter
+        inputJSON.addEventListener('keydown', (e) => {
+            if ((e.ctrlKey || e.metaKey) && e.key === 'Enter') {
+                formatJSON();
+            }
+        });
+    </script>
+</body>
+</html>

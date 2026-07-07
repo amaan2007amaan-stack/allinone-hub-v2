@@ -1,0 +1,304 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Word Counter - All In One Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --bg: #FFFFFF;
+            --surface: #F9FAFB;
+            --text: #111827;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+        }
+        
+        .back-btn {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .breadcrumb {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+        }
+        
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-desc {
+            color: var(--text-secondary);
+            font-size: 1.125rem;
+            margin-bottom: 2rem;
+        }
+        
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+        }
+        
+        .stat-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .stat-value {
+            font-size: 2rem;
+            font-weight: 700;
+            color: var(--primary);
+        }
+        
+        .stat-label {
+            color: var(--text-secondary);
+            font-size: 0.875rem;
+            margin-top: 0.25rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .textarea-wrapper {
+            position: relative;
+        }
+        
+        textarea {
+            width: 100%;
+            min-height: 300px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: inherit;
+            font-size: 1rem;
+            resize: vertical;
+        }
+        
+        textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .btn-group {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+        
+        .btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-clear {
+            background: #EF4444;
+            color: white;
+        }
+        
+        .btn-clear:hover {
+            background: #DC2626;
+        }
+        
+        .btn-copy {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-copy:hover {
+            background: #5558E3;
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 2rem; }
+            .stats-grid { grid-template-columns: repeat(2, 1fr); }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                <span style="font-size: 1.5rem;">🚀</span>
+                <span>All In One Hub</span>
+            </a>
+            <a href="../../index.html" class="back-btn">← Back</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="breadcrumb">
+            <a href="../../index.html">Home</a> / Text Tools / Word Counter
+        </div>
+
+        <h1 class="page-title">📝 Word Counter</h1>
+        <p class="page-desc">Count words, characters, sentences, and more in real-time</p>
+
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-value" id="wordCount">0</div>
+                <div class="stat-label">Words</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="charCount">0</div>
+                <div class="stat-label">Characters</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="charNoSpace">0</div>
+                <div class="stat-label">Characters (no spaces)</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="sentenceCount">0</div>
+                <div class="stat-label">Sentences</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="paragraphCount">0</div>
+                <div class="stat-label">Paragraphs</div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-value" id="readTime">0</div>
+                <div class="stat-label">Reading Time (min)</div>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="textarea-wrapper">
+                <textarea id="textInput" placeholder="Start typing or paste your text here..."></textarea>
+            </div>
+            <div class="btn-group">
+                <button class="btn btn-copy" onclick="copyText()">📋 Copy Text</button>
+                <button class="btn btn-clear" onclick="clearText()">🗑️ Clear</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const textInput = document.getElementById('textInput');
+
+        textInput.addEventListener('input', updateStats);
+
+        function updateStats() {
+            const text = textInput.value;
+            
+            // Words
+            const words = text.trim() ? text.trim().split(/\s+/).filter(word => word.length > 0) : [];
+            document.getElementById('wordCount').textContent = words.length;
+            
+            // Characters
+            document.getElementById('charCount').textContent = text.length;
+            
+            // Characters without spaces
+            document.getElementById('charNoSpace').textContent = text.replace(/\s/g, '').length;
+            
+            // Sentences
+            const sentences = text.split(/[.!?]+/).filter(s => s.trim().length > 0);
+            document.getElementById('sentenceCount').textContent = sentences.length;
+            
+            // Paragraphs
+            const paragraphs = text.split(/\n+/).filter(p => p.trim().length > 0);
+            document.getElementById('paragraphCount').textContent = paragraphs.length;
+            
+            // Reading time (assuming 200 words per minute)
+            const readingTime = Math.ceil(words.length / 200);
+            document.getElementById('readTime').textContent = readingTime;
+        }
+
+        function copyText() {
+            const text = textInput.value;
+            if (!text) {
+                showNotification('Nothing to copy!', 'error');
+                return;
+            }
+            navigator.clipboard.writeText(text).then(() => {
+                showNotification('Text copied!', 'success');
+            });
+        }
+
+        function clearText() {
+            if (confirm('Clear all text?')) {
+                textInput.value = '';
+                updateStats();
+                showNotification('Text cleared', 'info');
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const colors = { success: '#10B981', error: '#EF4444', info: '#6366F1' };
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; bottom: 20px; right: 20px;
+                background: ${colors[type]}; color: white;
+                padding: 1rem 1.5rem; border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+    </script>
+</body>
+</html>

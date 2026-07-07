@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Percentage Calculator - All In One Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --success: #10B981;
+            --bg: #FFFFFF;
+            --surface: #F9FAFB;
+            --text: #111827;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--surface);
+            color: var(--text);
+        }
+        
+        .header {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+        }
+        
+        .back-btn {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .calculator-grid {
+            display: grid;
+            gap: 1.5rem;
+        }
+        
+        .calc-card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .calc-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 1.5rem;
+            color: var(--primary);
+        }
+        
+        .calc-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+            flex-wrap: wrap;
+        }
+        
+        .calc-row input {
+            flex: 1;
+            min-width: 80px;
+            padding: 0.75rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .calc-row input:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .calc-row span {
+            font-weight: 500;
+            color: var(--text-secondary);
+        }
+        
+        .result-box {
+            background: linear-gradient(135deg, var(--primary), #8B5CF6);
+            color: white;
+            padding: 1.5rem;
+            border-radius: 12px;
+            text-align: center;
+            margin-top: 1rem;
+        }
+        
+        .result-label {
+            font-size: 0.875rem;
+            opacity: 0.9;
+            margin-bottom: 0.5rem;
+        }
+        
+        .result-value {
+            font-size: 2rem;
+            font-weight: 700;
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 2rem; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                <span style="font-size: 1.5rem;">🚀</span>
+                <span>All In One Hub</span>
+            </a>
+            <a href="../../index.html" class="back-btn">← Back</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">% Percentage Calculator</h1>
+        <p class="page-desc">Calculate percentages quickly and easily</p>
+
+        <div class="calculator-grid">
+            <!-- What is X% of Y? -->
+            <div class="calc-card">
+                <h3>What is X% of Y?</h3>
+                <div class="calc-row">
+                    <span>What is</span>
+                    <input type="number" id="calc1_x" placeholder="10" oninput="calc1()">
+                    <span>% of</span>
+                    <input type="number" id="calc1_y" placeholder="200" oninput="calc1()">
+                    <span>?</span>
+                </div>
+                <div class="result-box">
+                    <div class="result-label">Result</div>
+                    <div class="result-value" id="calc1_result">-</div>
+                </div>
+            </div>
+
+            <!-- X is what % of Y? -->
+            <div class="calc-card">
+                <h3>X is what % of Y?</h3>
+                <div class="calc-row">
+                    <input type="number" id="calc2_x" placeholder="50" oninput="calc2()">
+                    <span>is what % of</span>
+                    <input type="number" id="calc2_y" placeholder="200" oninput="calc2()">
+                    <span>?</span>
+                </div>
+                <div class="result-box">
+                    <div class="result-label">Result</div>
+                    <div class="result-value" id="calc2_result">-</div>
+                </div>
+            </div>
+
+            <!-- Percentage Increase/Decrease -->
+            <div class="calc-card">
+                <h3>Percentage Increase/Decrease</h3>
+                <div class="calc-row">
+                    <span>From</span>
+                    <input type="number" id="calc3_from" placeholder="100" oninput="calc3()">
+                    <span>to</span>
+                    <input type="number" id="calc3_to" placeholder="150" oninput="calc3()">
+                </div>
+                <div class="result-box">
+                    <div class="result-label">Percentage Change</div>
+                    <div class="result-value" id="calc3_result">-</div>
+                </div>
+            </div>
+
+            <!-- Increase X by Y% -->
+            <div class="calc-card">
+                <h3>Increase/Decrease X by Y%</h3>
+                <div class="calc-row">
+                    <input type="number" id="calc4_x" placeholder="100" oninput="calc4()">
+                    <select id="calc4_op" onchange="calc4()" style="padding: 0.75rem; border: 2px solid var(--border); border-radius: 8px;">
+                        <option value="+">Increased by</option>
+                        <option value="-">Decreased by</option>
+                    </select>
+                    <input type="number" id="calc4_y" placeholder="20" oninput="calc4()">
+                    <span>%</span>
+                </div>
+                <div class="result-box">
+                    <div class="result-label">Result</div>
+                    <div class="result-value" id="calc4_result">-</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        function calc1() {
+            const x = parseFloat(document.getElementById('calc1_x').value);
+            const y = parseFloat(document.getElementById('calc1_y').value);
+            
+            if (!isNaN(x) && !isNaN(y)) {
+                const result = (x / 100) * y;
+                document.getElementById('calc1_result').textContent = result.toFixed(2);
+            } else {
+                document.getElementById('calc1_result').textContent = '-';
+            }
+        }
+
+        function calc2() {
+            const x = parseFloat(document.getElementById('calc2_x').value);
+            const y = parseFloat(document.getElementById('calc2_y').value);
+            
+            if (!isNaN(x) && !isNaN(y) && y !== 0) {
+                const result = (x / y) * 100;
+                document.getElementById('calc2_result').textContent = result.toFixed(2) + '%';
+            } else {
+                document.getElementById('calc2_result').textContent = '-';
+            }
+        }
+
+        function calc3() {
+            const from = parseFloat(document.getElementById('calc3_from').value);
+            const to = parseFloat(document.getElementById('calc3_to').value);
+            
+            if (!isNaN(from) && !isNaN(to) && from !== 0) {
+                const change = ((to - from) / from) * 100;
+                const sign = change >= 0 ? '+' : '';
+                document.getElementById('calc3_result').textContent = sign + change.toFixed(2) + '%';
+            } else {
+                document.getElementById('calc3_result').textContent = '-';
+            }
+        }
+
+        function calc4() {
+            const x = parseFloat(document.getElementById('calc4_x').value);
+            const y = parseFloat(document.getElementById('calc4_y').value);
+            const op = document.getElementById('calc4_op').value;
+            
+            if (!isNaN(x) && !isNaN(y)) {
+                const percentValue = (y / 100) * x;
+                const result = op === '+' ? x + percentValue : x - percentValue;
+                document.getElementById('calc4_result').textContent = result.toFixed(2);
+            } else {
+                document.getElementById('calc4_result').textContent = '-';
+            }
+        }
+    </script>
+</body>
+</html>

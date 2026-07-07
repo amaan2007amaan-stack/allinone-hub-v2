@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit Converter - All In One Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --bg: #FFFFFF;
+            --surface: #F9FAFB;
+            --text: #111827;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--surface);
+            color: var(--text);
+        }
+        
+        .header {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+        }
+        
+        .back-btn {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .category-tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+        
+        .category-tab {
+            padding: 0.625rem 1.25rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 500;
+        }
+        
+        .category-tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        .converter-section {
+            display: grid;
+            grid-template-columns: 1fr auto 1fr;
+            gap: 1rem;
+            align-items: center;
+        }
+        
+        .converter-box {
+            display: flex;
+            flex-direction: column;
+            gap: 0.75rem;
+        }
+        
+        .converter-box label {
+            font-weight: 500;
+            font-size: 0.875rem;
+            color: var(--text-secondary);
+        }
+        
+        .converter-box input,
+        .converter-box select {
+            padding: 0.875rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+        
+        .converter-box input:focus,
+        .converter-box select:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .converter-box input {
+            font-size: 1.25rem;
+            font-weight: 600;
+        }
+        
+        .swap-btn {
+            background: var(--surface);
+            border: 2px solid var(--border);
+            border-radius: 50%;
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.25rem;
+            transition: all 0.3s;
+        }
+        
+        .swap-btn:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+            transform: rotate(180deg);
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 2rem; }
+            .converter-section {
+                grid-template-columns: 1fr;
+            }
+            .swap-btn {
+                transform: rotate(90deg);
+            }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                <span style="font-size: 1.5rem;">🚀</span>
+                <span>All In One Hub</span>
+            </a>
+            <a href="../../index.html" class="back-btn">← Back</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">🔄 Unit Converter</h1>
+        <p class="page-desc">Convert between different units of measurement</p>
+
+        <div class="card">
+            <div class="category-tabs">
+                <button class="category-tab active" onclick="switchCategory('length')">📏 Length</button>
+                <button class="category-tab" onclick="switchCategory('weight')">⚖️ Weight</button>
+                <button class="category-tab" onclick="switchCategory('temperature')">🌡️ Temperature</button>
+                <button class="category-tab" onclick="switchCategory('area')">📐 Area</button>
+                <button class="category-tab" onclick="switchCategory('volume')">🧪 Volume</button>
+            </div>
+
+            <div class="converter-section">
+                <div class="converter-box">
+                    <label>From</label>
+                    <input type="number" id="fromValue" placeholder="0" oninput="convert()" value="1">
+                    <select id="fromUnit" onchange="convert()"></select>
+                </div>
+
+                <button class="swap-btn" onclick="swapUnits()">⇄</button>
+
+                <div class="converter-box">
+                    <label>To</label>
+                    <input type="number" id="toValue" placeholder="0" readonly>
+                    <select id="toUnit" onchange="convert()"></select>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const units = {
+            length: {
+                'Meter (m)': 1,
+                'Kilometer (km)': 0.001,
+                'Centimeter (cm)': 100,
+                'Millimeter (mm)': 1000,
+                'Mile (mi)': 0.000621371,
+                'Yard (yd)': 1.09361,
+                'Foot (ft)': 3.28084,
+                'Inch (in)': 39.3701
+            },
+            weight: {
+                'Kilogram (kg)': 1,
+                'Gram (g)': 1000,
+                'Milligram (mg)': 1000000,
+                'Pound (lb)': 2.20462,
+                'Ounce (oz)': 35.274,
+                'Ton (t)': 0.001
+            },
+            temperature: {
+                'Celsius (°C)': 'c',
+                'Fahrenheit (°F)': 'f',
+                'Kelvin (K)': 'k'
+            },
+            area: {
+                'Square Meter (m²)': 1,
+                'Square Kilometer (km²)': 0.000001,
+                'Square Centimeter (cm²)': 10000,
+                'Square Mile (mi²)': 3.861e-7,
+                'Square Yard (yd²)': 1.19599,
+                'Square Foot (ft²)': 10.7639,
+                'Acre': 0.000247105,
+                'Hectare': 0.0001
+            },
+            volume: {
+                'Liter (L)': 1,
+                'Milliliter (mL)': 1000,
+                'Cubic Meter (m³)': 0.001,
+                'Gallon (gal)': 0.264172,
+                'Quart (qt)': 1.05669,
+                'Pint (pt)': 2.11338,
+                'Cup': 4.22675,
+                'Fluid Ounce (fl oz)': 33.814
+            }
+        };
+
+        let currentCategory = 'length';
+
+        function switchCategory(category) {
+            currentCategory = category;
+            
+            // Update active tab
+            document.querySelectorAll('.category-tab').forEach(tab => tab.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            loadUnits();
+            convert();
+        }
+
+        function loadUnits() {
+            const fromUnit = document.getElementById('fromUnit');
+            const toUnit = document.getElementById('toUnit');
+            
+            const unitList = Object.keys(units[currentCategory]);
+            
+            fromUnit.innerHTML = '';
+            toUnit.innerHTML = '';
+            
+            unitList.forEach(unit => {
+                fromUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
+                toUnit.innerHTML += `<option value="${unit}">${unit}</option>`;
+            });
+            
+            if (unitList.length > 1) {
+                toUnit.selectedIndex = 1;
+            }
+        }
+
+        function convert() {
+            const fromValue = parseFloat(document.getElementById('fromValue').value) || 0;
+            const fromUnit = document.getElementById('fromUnit').value;
+            const toUnit = document.getElementById('toUnit').value;
+            
+            let result;
+            
+            if (currentCategory === 'temperature') {
+                result = convertTemperature(fromValue, fromUnit, toUnit);
+            } else {
+                const fromFactor = units[currentCategory][fromUnit];
+                const toFactor = units[currentCategory][toUnit];
+                result = fromValue * (toFactor / fromFactor);
+            }
+            
+            document.getElementById('toValue').value = result.toFixed(6).replace(/\.?0+$/, '');
+        }
+
+        function convertTemperature(value, from, to) {
+            const fromType = units.temperature[from];
+            const toType = units.temperature[to];
+            
+            // Convert to Celsius first
+            let celsius;
+            if (fromType === 'c') celsius = value;
+            else if (fromType === 'f') celsius = (value - 32) * 5/9;
+            else if (fromType === 'k') celsius = value - 273.15;
+            
+            // Convert from Celsius to target
+            if (toType === 'c') return celsius;
+            else if (toType === 'f') return celsius * 9/5 + 32;
+            else if (toType === 'k') return celsius + 273.15;
+        }
+
+        function swapUnits() {
+            const fromUnit = document.getElementById('fromUnit');
+            const toUnit = document.getElementById('toUnit');
+            const fromValue = document.getElementById('fromValue');
+            const toValue = document.getElementById('toValue');
+            
+            // Swap unit selections
+            const temp = fromUnit.selectedIndex;
+            fromUnit.selectedIndex = toUnit.selectedIndex;
+            toUnit.selectedIndex = temp;
+            
+            // Swap values
+            fromValue.value = toValue.value;
+            
+            convert();
+        }
+
+        // Initialize
+        loadUnits();
+        convert();
+    </script>
+</body>
+</html>

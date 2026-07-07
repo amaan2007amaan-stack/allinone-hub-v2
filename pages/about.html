@@ -1,0 +1,240 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About - All In One Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --bg: #FFFFFF;
+            --surface: #F9FAFB;
+            --text: #111827;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--surface);
+            color: var(--text);
+            line-height: 1.6;
+        }
+        
+        .header {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+        }
+        
+        .back-btn {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+        
+        h1 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: var(--primary);
+        }
+        
+        h2 {
+            font-size: 1.75rem;
+            margin: 2rem 0 1rem;
+            color: var(--text);
+        }
+        
+        p {
+            margin-bottom: 1rem;
+            color: var(--text-secondary);
+        }
+        
+        ul {
+            margin: 1rem 0 1rem 2rem;
+            color: var(--text-secondary);
+        }
+        
+        li {
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin: 2rem 0;
+        }
+        
+        .feature-box {
+            text-align: center;
+            padding: 1.5rem;
+            background: var(--surface);
+            border-radius: 12px;
+        }
+        
+        .feature-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+        
+        .feature-title {
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text);
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="../index.html" class="logo">
+                <span style="font-size: 1.5rem;">🚀</span>
+                <span>All In One Hub</span>
+            </a>
+            <a href="../index.html" class="back-btn">← Back to Home</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <div class="card">
+            <h1>About All In One Hub</h1>
+            
+            <p>Welcome to <strong>All In One Hub</strong> - your ultimate destination for free online tools! We believe that everyone should have access to powerful, easy-to-use tools without the hassle of signups, subscriptions, or hidden fees.</p>
+
+            <h2>Our Mission</h2>
+            <p>Our mission is simple: provide the best collection of free online tools that are fast, secure, and accessible to everyone. Whether you're a developer, designer, student, or professional, we've got the tools you need.</p>
+
+            <h2>Why Choose Us?</h2>
+            
+            <div class="feature-grid">
+                <div class="feature-box">
+                    <div class="feature-icon">💯</div>
+                    <div class="feature-title">100% Free</div>
+                    <p>All tools are completely free with no limits or restrictions</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">🚫</div>
+                    <div class="feature-title">No Registration</div>
+                    <p>Start using tools immediately without creating an account</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">🔒</div>
+                    <div class="feature-title">Privacy First</div>
+                    <p>Your files and data never leave your device</p>
+                </div>
+                
+                <div class="feature-box">
+                    <div class="feature-icon">⚡</div>
+                    <div class="feature-title">Lightning Fast</div>
+                    <p>Optimized for speed and performance</p>
+                </div>
+            </div>
+
+            <h2>What We Offer</h2>
+            <p>We provide over 50 carefully crafted tools across multiple categories:</p>
+            
+            <ul>
+                <li><strong>PDF Tools</strong> - Merge, split, compress, and convert PDFs</li>
+                <li><strong>Image Tools</strong> - Compress, resize, crop, and convert images</li>
+                <li><strong>Developer Tools</strong> - JSON formatter, base64, regex tester, and more</li>
+                <li><strong>Text Tools</strong> - Word counter, case converter, markdown preview</li>
+                <li><strong>Calculators</strong> - Age, BMI, percentage, loan EMI calculators</li>
+                <li><strong>Security Tools</strong> - Password generator, hash generator, UUID generator</li>
+                <li><strong>Converters</strong> - Unit, color, timezone, currency converters</li>
+                <li><strong>Utilities</strong> - QR code generator, stopwatch, notes, and more</li>
+            </ul>
+
+            <h2>Our Commitment to Privacy</h2>
+            <p>Your privacy is our top priority. Here's our guarantee:</p>
+            
+            <ul>
+                <li>All tools run entirely in your browser</li>
+                <li>We don't upload your files to any server</li>
+                <li>We don't track your activity or collect personal data</li>
+                <li>We don't use cookies for tracking</li>
+                <li>Our code is open source and transparent</li>
+            </ul>
+
+            <h2>Technology</h2>
+            <p>All In One Hub is built with modern web technologies:</p>
+            
+            <ul>
+                <li>Pure HTML5, CSS3, and JavaScript (ES6+)</li>
+                <li>No frameworks or heavy dependencies</li>
+                <li>Minimal use of CDN libraries</li>
+                <li>Optimized for performance and accessibility</li>
+                <li>Fully responsive design</li>
+            </ul>
+
+            <h2>Open Source</h2>
+            <p>This project is open source and available on GitHub. We welcome contributions from the community. If you'd like to add a new tool, improve existing ones, or report bugs, please visit our GitHub repository.</p>
+
+            <h2>Contact Us</h2>
+            <p>Have questions, suggestions, or feedback? We'd love to hear from you!</p>
+            
+            <ul>
+                <li>Email: contact@example.com</li>
+                <li>GitHub: github.com/yourusername/all-in-one-hub</li>
+                <li>Twitter: @allinonehub</li>
+            </ul>
+
+            <h2>Support Us</h2>
+            <p>If you find our tools helpful, please consider:</p>
+            
+            <ul>
+                <li>⭐ Starring our GitHub repository</li>
+                <li>📢 Sharing with friends and colleagues</li>
+                <li>💡 Contributing new tool ideas</li>
+                <li>🐛 Reporting bugs and issues</li>
+            </ul>
+
+            <p style="margin-top: 2rem; padding-top: 2rem; border-top: 1px solid var(--border); text-align: center;">
+                Made with ❤️ for the community<br>
+                <small>© 2024 All In One Hub. All rights reserved.</small>
+            </p>
+        </div>
+    </div>
+</body>
+</html>

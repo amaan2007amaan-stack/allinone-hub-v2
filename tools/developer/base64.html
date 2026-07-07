@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Base64 Encoder/Decoder - All In One Hub</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #6366F1;
+            --success: #10B981;
+            --bg: #FFFFFF;
+            --surface: #F9FAFB;
+            --text: #111827;
+            --text-secondary: #6B7280;
+            --border: #E5E7EB;
+            --shadow: rgba(0, 0, 0, 0.1);
+        }
+        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background: var(--surface);
+            color: var(--text);
+        }
+        
+        .header {
+            background: white;
+            padding: 1rem 1.5rem;
+            border-bottom: 1px solid var(--border);
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .header-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: var(--text);
+            font-weight: 700;
+        }
+        
+        .back-btn {
+            padding: 0.5rem 1rem;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text);
+        }
+        
+        .container {
+            max-width: 900px;
+            margin: 2rem auto;
+            padding: 0 1.5rem;
+        }
+        
+        .page-title {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+        
+        .page-desc {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+        
+        .tabs {
+            display: flex;
+            gap: 0.5rem;
+            margin-bottom: 1.5rem;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px var(--shadow);
+        }
+        
+        .tab {
+            flex: 1;
+            padding: 0.75rem;
+            border: none;
+            background: transparent;
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+        
+        .tab.active {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .tab-content {
+            display: none;
+        }
+        
+        .tab-content.active {
+            display: block;
+        }
+        
+        .card {
+            background: white;
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 1px 3px var(--shadow);
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+        
+        .form-group label {
+            display: block;
+            font-weight: 500;
+            margin-bottom: 0.5rem;
+        }
+        
+        .form-group textarea {
+            width: 100%;
+            min-height: 150px;
+            padding: 1rem;
+            border: 2px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.875rem;
+            resize: vertical;
+        }
+        
+        .form-group textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+        }
+        
+        .upload-area {
+            border: 2px dashed var(--border);
+            border-radius: 8px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .upload-area:hover {
+            border-color: var(--primary);
+            background: var(--surface);
+        }
+        
+        .file-input {
+            display: none;
+        }
+        
+        .btn-group {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+            gap: 0.75rem;
+        }
+        
+        .btn {
+            padding: 0.875rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+        
+        .btn-primary {
+            background: var(--primary);
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #5558E3;
+        }
+        
+        .btn-secondary {
+            background: var(--surface);
+            color: var(--text);
+            border: 1px solid var(--border);
+        }
+        
+        .btn-secondary:hover {
+            background: var(--border);
+        }
+
+        @media (max-width: 768px) {
+            .page-title { font-size: 2rem; }
+            .tabs { flex-direction: column; }
+        }
+    </style>
+</head>
+<body>
+    <header class="header">
+        <div class="header-container">
+            <a href="../../index.html" class="logo">
+                <span style="font-size: 1.5rem;">🚀</span>
+                <span>All In One Hub</span>
+            </a>
+            <a href="../../index.html" class="back-btn">← Back</a>
+        </div>
+    </header>
+
+    <div class="container">
+        <h1 class="page-title">🔐 Base64 Encoder/Decoder</h1>
+        <p class="page-desc">Encode and decode Base64 strings and files</p>
+
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('text')">📝 Text</button>
+            <button class="tab" onclick="switchTab('file')">📄 File</button>
+        </div>
+
+        <!-- Text Tab -->
+        <div id="text-tab" class="tab-content active">
+            <div class="card">
+                <div class="form-group">
+                    <label>Input Text</label>
+                    <textarea id="textInput" placeholder="Enter text to encode or Base64 to decode..."></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-primary" onclick="encodeText()">🔒 Encode</button>
+                    <button class="btn btn-primary" onclick="decodeText()">🔓 Decode</button>
+                    <button class="btn btn-secondary" onclick="copyResult()">📋 Copy</button>
+                    <button class="btn btn-secondary" onclick="clearText()">🗑️ Clear</button>
+                </div>
+
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label>Result</label>
+                    <textarea id="textOutput" placeholder="Result will appear here..." readonly></textarea>
+                </div>
+            </div>
+        </div>
+
+        <!-- File Tab -->
+        <div id="file-tab" class="tab-content">
+            <div class="card">
+                <h3 style="margin-bottom: 1rem;">File to Base64</h3>
+                
+                <div class="upload-area" onclick="document.getElementById('fileInput').click()">
+                    <div style="font-size: 3rem; margin-bottom: 0.5rem;">📤</div>
+                    <div>Click to upload file</div>
+                    <div style="color: var(--text-secondary); font-size: 0.875rem; margin-top: 0.5rem;">
+                        Any file type (Max 5MB)
+                    </div>
+                </div>
+                <input type="file" id="fileInput" class="file-input">
+
+                <div class="form-group" style="margin-top: 1.5rem;">
+                    <label>Base64 Output</label>
+                    <textarea id="fileOutput" placeholder="Base64 encoded file will appear here..." readonly></textarea>
+                </div>
+
+                <div class="btn-group">
+                    <button class="btn btn-secondary" onclick="copyFileResult()">📋 Copy</button>
+                    <button class="btn btn-secondary" onclick="downloadBase64()">💾 Download as .txt</button>
+                </div>
+
+                <hr style="margin: 2rem 0; border: none; border-top: 1px solid var(--border);">
+
+                <h3 style="margin-bottom: 1rem;">Base64 to File</h3>
+                
+                <div class="form-group">
+                    <label>Base64 String</label>
+                    <textarea id="base64Input" placeholder="Paste Base64 string here..."></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label>File Name</label>
+                    <input type="text" id="fileName" placeholder="output.jpg" style="width: 100%; padding: 0.75rem; border: 2px solid var(--border); border-radius: 8px;">
+                </div>
+
+                <button class="btn btn-primary" style="width: 100%;" onclick="decodeFile()">💾 Download File</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let currentTab = 'text';
+
+        function switchTab(tab) {
+            currentTab = tab;
+            
+            document.querySelectorAll('.tab').forEach(t => t.classList.remove('active'));
+            event.target.classList.add('active');
+            
+            document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+            document.getElementById(tab + '-tab').classList.add('active');
+        }
+
+        // Text Encoding/Decoding
+        function encodeText() {
+            const input = document.getElementById('textInput').value;
+            if (!input) {
+                showNotification('Please enter text to encode!', 'error');
+                return;
+            }
+
+            try {
+                const encoded = btoa(unescape(encodeURIComponent(input)));
+                document.getElementById('textOutput').value = encoded;
+                showNotification('Text encoded successfully!', 'success');
+            } catch (error) {
+                showNotification('Error encoding text!', 'error');
+            }
+        }
+
+        function decodeText() {
+            const input = document.getElementById('textInput').value;
+            if (!input) {
+                showNotification('Please enter Base64 to decode!', 'error');
+                return;
+            }
+
+            try {
+                const decoded = decodeURIComponent(escape(atob(input)));
+                document.getElementById('textOutput').value = decoded;
+                showNotification('Text decoded successfully!', 'success');
+            } catch (error) {
+                showNotification('Invalid Base64 string!', 'error');
+            }
+        }
+
+        function copyResult() {
+            const output = document.getElementById('textOutput').value;
+            if (!output) {
+                showNotification('Nothing to copy!', 'error');
+                return;
+            }
+
+            navigator.clipboard.writeText(output).then(() => {
+                showNotification('Copied to clipboard!', 'success');
+            });
+        }
+
+        function clearText() {
+            document.getElementById('textInput').value = '';
+            document.getElementById('textOutput').value = '';
+            showNotification('Cleared!', 'info');
+        }
+
+        // File Encoding
+        document.getElementById('fileInput').addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+
+            if (file.size > 5 * 1024 * 1024) {
+                showNotification('File size exceeds 5MB!', 'error');
+                return;
+            }
+
+            const reader = new FileReader();
+            reader.onload = (event) => {
+                const base64 = event.target.result;
+                document.getElementById('fileOutput').value = base64;
+                showNotification('File encoded to Base64!', 'success');
+            };
+            reader.readAsDataURL(file);
+        });
+
+        function copyFileResult() {
+            const output = document.getElementById('fileOutput').value;
+            if (!output) {
+                showNotification('Nothing to copy!', 'error');
+                return;
+            }
+
+            navigator.clipboard.writeText(output).then(() => {
+                showNotification('Copied to clipboard!', 'success');
+            });
+        }
+
+        function downloadBase64() {
+            const output = document.getElementById('fileOutput').value;
+            if (!output) {
+                showNotification('Nothing to download!', 'error');
+                return;
+            }
+
+            const blob = new Blob([output], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'base64.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+            showNotification('Downloaded!', 'success');
+        }
+
+        // File Decoding
+        function decodeFile() {
+            const base64Input = document.getElementById('base64Input').value;
+            const fileName = document.getElementById('fileName').value || 'output.bin';
+
+            if (!base64Input) {
+                showNotification('Please enter Base64 string!', 'error');
+                return;
+            }
+
+            try {
+                const base64Data = base64Input.includes(',') ? base64Input.split(',')[1] : base64Input;
+                const byteCharacters = atob(base64Data);
+                const byteNumbers = new Array(byteCharacters.length);
+                
+                for (let i = 0; i < byteCharacters.length; i++) {
+                    byteNumbers[i] = byteCharacters.charCodeAt(i);
+                }
+                
+                const byteArray = new Uint8Array(byteNumbers);
+                const blob = new Blob([byteArray]);
+                
+                const url = URL.createObjectURL(blob);
+                const a = document.createElement('a');
+                a.href = url;
+                a.download = fileName;
+                a.click();
+                URL.revokeObjectURL(url);
+                
+                showNotification('File downloaded!', 'success');
+            } catch (error) {
+                showNotification('Invalid Base64 string!', 'error');
+            }
+        }
+
+        function showNotification(message, type = 'info') {
+            const colors = { success: '#10B981', error: '#EF4444', info: '#6366F1' };
+            const notification = document.createElement('div');
+            notification.style.cssText = `
+                position: fixed; bottom: 20px; right: 20px;
+                background: ${colors[type]}; color: white;
+                padding: 1rem 1.5rem; border-radius: 8px;
+                box-shadow: 0 4px 12px rgba(0,0,0,0.15); z-index: 10000;
+            `;
+            notification.textContent = message;
+            document.body.appendChild(notification);
+            setTimeout(() => notification.remove(), 3000);
+        }
+    </script>
+</body>
+</html>
